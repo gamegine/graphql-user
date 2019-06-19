@@ -17,4 +17,10 @@ node {
 			sh 'npm install'
 		}
 	}
+
+	stage('test') {
+		nodejs(nodeJSInstallationName: 'NodeJS12') {
+			sh 'npm test'
+		}
+	}
 }
