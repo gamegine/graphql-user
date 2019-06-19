@@ -16,6 +16,7 @@ var root = {
   },
 };
 
+module.exports = root;
 var app = express();
 app.use('/graphql', graphqlHTTP({
   schema: schema,
