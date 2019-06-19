@@ -8,6 +8,13 @@ node {
 	
 	stage('Build image') {
 		/* This builds the actual image; synonymous to docker build on the command line */
-		app = docker.build()
+		//app = docker.build()// error
+		sh "docker build . -t graphql-user:1"
+	}
+	
+	stage('install') {
+		nodejs(nodeJSInstallationName: 'NodeJS12') {
+			sh 'npm install'
+		}
 	}
 }
