@@ -6,21 +6,27 @@ node {
 		checkout scm
 		sh'ls -la'
 	}
+	
+	stage('Build image') {
+		app = docker.build('gamegine/test')
+	}
 
 	stage('install') {
-		nodejs(nodeJSInstallationName: 'NodeJS12') {
-			sh 'npm install'
-		}
+		//nodejs(nodeJSInstallationName: 'NodeJS12') {
+		//	sh 'npm install'
+		//}
+		app.inside {
+        	    sh 'npm install'
+        	}
 	}
 
 	stage('test') {
-		nodejs(nodeJSInstallationName: 'NodeJS12') {
-			sh 'npm test'
-		}
-	}
-
-	stage('Build image') {
-		app = docker.build('gamegine/test')
+		//nodejs(nodeJSInstallationName: 'NodeJS12') {
+		//	sh 'npm test'
+		//}
+		app.inside {
+	            sh 'npm test'
+	        }
 	}
 
 	stage('Push image') {
