@@ -20,17 +20,12 @@ node {
 	}
 
 	stage('Build image') {
-		/* This builds the actual image; synonymous to docker build on the command line */
-		app = docker.build()// error
-		//sh "docker build . -t gamegine/test:test"
+		app = docker.build('gamegine/test')
 	}
 
 	stage('Push image') {
         docker.withRegistry('https://registry-1.docker.io/v2', 'docker-hub-credentials') {
-			docker.push("gamegine/test:test2")
-			//sh 'docker tag gamegine/test:test gamegine/test:test'
-			//sh 'docker push gamegine/test:test'
+			app.push("test")
 		}
 	}
-}q
-
+}
