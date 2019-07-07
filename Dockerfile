@@ -1,4 +1,4 @@
-From node:12
+FROM node:12
 WORKDIR /home/node/app
 COPY . /home/node/app
 EXPOSE 4000
